@@ -1,0 +1,59 @@
+import simplegui
+
+#XY and Color lists start at 27. Draw Big to small cicrles
+List_XY =[[165, 35], [100, 35],[35, 35],[165, 95],[100, 95],[35, 95],
+          [165, 155],[100, 155],[35, 155]]
+R='R'
+O='O'
+Y='Y' 
+G='G' 
+B='B' 
+P='P' 
+C='C'
+Z='Z'
+
+List_Solution1to27 = [C,C,C,B,C,R,B,P,R,B,Y,Y,B,P,R,P,P,O,G,G,Y,G,O,Y,G,O,O]
+List_Solution27to1 = [Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z]
+List_Paint = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 
+'black', 'white', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'purple', 
+'black', 'white', 'brown','red', 'orange', 'yellow', 'green', 'blue', 'purple', 
+'black', 'white', 'brown']
+m=0
+for k in range(0,27):
+    List_Solution27to1[k] = List_Solution1to27[26-k]
+while m <= 26:
+    if List_Solution27to1[m]==R:
+        List_Paint[m] =  'red'
+    elif List_Solution27to1[m]==O:
+         List_Paint[m] =  'orange'
+    elif List_Solution27to1[m]==Y:
+        List_Paint[m] =  'yellow'
+    elif List_Solution27to1[m]==G:
+        List_Paint[m] =  'green'
+    elif List_Solution27to1[m]==B:
+        List_Paint[m] =  'blue'
+    elif List_Solution27to1[m]==P:
+        List_Paint[m] =  'purple'
+    elif List_Solution27to1[m]==C:
+        List_Paint[m] =  'brown'
+    else:
+        print "nope"
+    m = m+1
+
+def draw_handler(canvas):
+    n=0
+    for n in range(0, 9):
+            canvas.draw_circle((List_XY[n]), 30, 5, 'Black', List_Paint[n])
+    n=0
+    for n in range(0, 9):
+            canvas.draw_circle((List_XY[n]), 20, 5, 'Black', List_Paint[n+9])
+    n=0
+    for n in range(0, 9):
+            canvas.draw_circle((List_XY[n]), 10, 5, 'Black', List_Paint[n+18])
+          
+    #know where origin is
+    #canvas.draw_circle((5,5), 5, 5, 'Black', 'black')
+frame = simplegui.create_frame('Testing', 200, 190)
+frame.set_canvas_background('White')
+frame.set_draw_handler(draw_handler)
+frame.start()
